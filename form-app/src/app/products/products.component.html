@@ -1,0 +1,97 @@
+<!-- <h2 class="text-center text-primary" style="background-color: black; color: white !important; padding:10px">CRUD App Example</h2>
+<form>
+    <div class="product_container">
+        <div class="updateProduct">
+            <h5>Update Product Info</h5>
+            <div class="infoItem">
+                <label class="infoLabel">Name:</label>
+                <br>
+                <input type="text" class="infoInput">
+            </div>
+            <div class="infoItem">
+                <label class="infoLabel">Price:</label>
+                <br>
+                <input type="text" class="infoInput">
+            </div>
+            <div class="updateButton">
+                <input type="submit" name="submit" id="submitBtn" style="background-color: aqua; border: none; border-radius: 5px;">
+                <input type="reset" name="reset " id="resetBtn " style=" background-color: rgb(194, 190, 190); border: none; border-radius: 5px; " ng-click="reset()">
+            </div>
+        </div>
+        <div class="productList ">
+            <h5>Product List</h5>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+                <tr *ngFor="let p of products; let i = index">
+                    <td id="stt">{{i+1}}</td>
+                    <td id="pName">{{p.name}}</td>
+                    <td id="pPrice">{{p.price}}</td>
+                    <td><button>Edit</button></td>
+                    <td><button>Del</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form> -->
+<h2 class="text-center bg-dark text-light lh-lg">CRUD App Example</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="container-fluid">
+                <form #productForm="ngForm" (ngSubmit)="submitData(productForm)">
+
+                    <h4 class="text-center">Update Product Info</h4>
+
+                    <input type="hidden" name="_id" 
+                        [(ngModel)]="product['_id']">
+                    <div class="mb-3">
+                        <label for="name">Name: </label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" 
+                        [(ngModel)]="product['name']">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price">Price: </label>
+                        <input type="number" name="price" class="form-control" id="price" [(ngModel)]="product.price">
+                    </div>
+
+                    <div class="mb-3 text-end">
+                        <button type="submit" class="btn btn-primary">Submit (nộp)</button>
+                        <button type="reset" class="btn btn-secondary ms-1">Reset</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h4 class="text-center">Product List</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of products; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{p.name}}</td>
+                        <td>{{p.price}}</td>
+                        <td>
+                            <!-- <i class="bi bi-pencil">Edit</i> -->
+                            <!-- <i class="bi bi-trash ms-2">Del</i> -->
+                            <i class="bi bi-pencil" (click)="edit(p)"></i>
+                            <i class="bi bi-trash ms-2" (click)="delete(p._id, productForm)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
